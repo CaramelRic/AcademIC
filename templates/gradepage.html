@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0 user-scalable=no">
+    <script src="../static/jquery.js"></script>
+    <script>
+        $(function(){
+            {% for x in range(0,len(GPACourse)) %}
+                var name = $("<li></li>").text("{{GPACourse[x]}}").addClass("subjectname");
+                var grade = $("<li></li>").text("{{GPACourseGrade[x]}}").addClass("subjectgrade");
+                var subject = $("<ul></ul>").append(name, grade).addClass("subject").attr("id","{{x}}" + "subject");
+                $(".allsubjects").append(subject);
+                var subjectdetails = $("<ul></ul>").addClass("subjectgradedetails");
+                {% for y in Details[x] %}
+                    var p = $("<p></p>").text("{{y[0]}}");
+                    var categoryname = $("<li></li>").append(p).addClass("categoryname");
+                    var category = $("<ul></ul>").append(categoryname).addClass("category");
+                    {% for z in y %}
+                        {% if type(z) != str %}
+                            var detailname = $("<li></li>").text("{{z[0]}}").addClass("detailname");
+                            var detailgrade = $("<li></li>").text("{{z[1]}}").addClass("detailgrade");
+                            var detail = $("<ul></ul>").append(detailname,detailgrade).addClass("detail");
+                            category.append(detail);
+                        {% end %}
+                    {% end %}
+                    subjectdetails.append(category);
+                {% end %}
+                subjectdetails.attr("id","{{x}}" + "detail");
+                $(".allsubjects").append(subjectdetails);
+                $("#" + "{{x}}" + "subject").click(function(){
+                    $("#" + "{{x}}" + "detail").toggle(200);
+                });
+                $("#" + "{{x}}" + "detail").hide()
+            {% end %}
+
+
+        });
+    </script>
+    <title>AcademIC</title>
+    <link rel="icon" href="../static/main-logo.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../static/main-logo.ico" type="image/x-icon">
+</head>
+<style type="text/css">
+    html, body{
+        top:0;
+        width: 100%;
+        background-color: white;
+    }
+    .topbar {
+        position : fixed;
+        border: 1px solid black;
+        top: 0;
+        left:0;
+        width:100%;
+        margin-bottom:15px;
+        overflow: hidden;
+        height: 30px;
+        background-color: #195a7a;
+        box-shadow: 0px 2px 8px black;
+    }
+    .topbar ul {
+        display: block;
+        list-style-type: none;
+        margin:0;
+        padding: 1px 5px 1px;
+    }
+    .topbar ul li {
+        float:left;
+        width: 33.333%;
+    }
+    .topbar ul li a{
+        padding: 0;
+        text-decoration: none;
+
+    }
+    .title{
+        line-height: 25px;
+        font-size: 25px;
+        color: white;
+        padding : 0;
+        margin: 0;
+        font-style: italic;
+        font-family: "DIN Condensed";
+
+    }
+    .GPA{
+        line-height: 30px;
+        font-size: 25px;
+        color: white;
+        margin: 0;
+        padding: 2.5px 0px 2.5px;
+        font-style: italic;
+        font-family: "DIN Condensed";
+
+    }
+    #center{
+        text-align: center;
+    }
+    #menubotton{
+        text-align: left;
+
+
+
+    }
+    #logoutbotton{
+        text-align: right;
+
+
+    }
+    .main{
+        position: absolute;
+        top: 30px;
+        left:0;
+        right:0;
+        width:100%;
+        margin-left:0;
+        margin-right: 0;
+        padding: 0px;
+
+        z-index: -1;
+    }
+    .allsubjects{
+        display: block;
+        list-style-type: none;
+        margin:0;
+        padding:0;
+        width: 100%;
+    }
+    .subject{
+        display: block;
+        margin:0;
+        width: 100%;
+        height: 80px;
+        padding: 0px;
+        background-color: crimson;
+        background-image: linear-gradient(-45deg,#23a6d5, #23d5ab);
+        box-shadow: 0px -2px 15px black;
+    }
+    .subjectname{
+        display:block;
+        width: 80%;
+        height: 80px;
+        float: left;
+        text-align: left;
+        line-height: 40px;
+        font-size: 25px;
+        color: white;
+        margin: 0;
+        padding: 0 ;
+        font-weight: bold;
+        font-family: "DIN Condensed","Arial";
+    }
+    .subjectgrade{
+        display:block;
+        width: 15%;
+        height: 70px;
+        float: left;
+        line-height: 70px;
+        text-align: right;
+        font-size: 70px;
+        color: white;
+        margin: 0;
+        padding: 5px 2.5% 5px ;
+        font-style: italic;
+        font-family: "DIN Condensed"
+    }
+    .subjectgradedetails{
+        display: block;
+        list-style-type: none;
+        margin:0;
+        padding:0;
+        width: 100%;
+    }
+    .category{
+        display: block;
+        list-style-type: none;
+        margin:0;
+        padding:0;
+        width: 100%;
+        background-image: linear-gradient(-45deg,#23a6d5, #177090);
+
+    }
+    .categoryname{
+        margin: 0;
+        text-align: center;
+        background-color: #177090;
+        height: 50px;
+        padding: 3px;
+        border-top-width: 1px;
+        border-top-color: black;
+        border-top-style: solid;
+    }
+    .categoryname p{
+        margin: 0;
+        height: 50px;
+        line-height: 25px;
+        color: white;
+        font-size: 23px;
+        font-weight: bolder;
+        font-family: "DIN Condensed","Arial";
+    }
+    .detail{
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        height: 40px;
+        padding: 1px 0 1px;
+    }
+    .detailname{
+        display:block;
+        width: 63%;
+        height: 38px;
+        float: left;
+        text-align: left;
+        line-height: 18px;
+        font-size: 18px;
+        color: white;
+        margin: 0;
+        font-weight: bold;
+        font-family: "DIN Condensed","Arial";
+    }
+    .detailgrade{
+        display:block;
+        width: 35%;
+        height: 38px;
+        float: left;
+        text-align: right;
+        font-size: 30px;
+        color: white;
+        margin: 0;
+        line-height: 38px;
+        font-style: italic;
+        padding: 0 1% 0 ;
+        font-family: "DIN Condensed"
+    }
+</style>
+<body>
+<div class = "topbar">
+    <ul>
+        <li id = "menubotton">
+            <p class = "GPA">GPA:{{GPA}}</p>
+
+
+        </li>
+        <li id = "center">
+            <p class="title">GradePage</p>
+        </li>
+        <li id = "logoutbotton">
+            <a href="/logout">
+                <img src="../static/logout.png" height="28" />
+            </a>
+
+        </li>
+    </ul>
+</div>
+
+<div class="main">
+    <ul class = "allsubjects">
+    </ul>
+</div>
+
+</body>
+</html>

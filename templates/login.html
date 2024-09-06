@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name = 'viewport' content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+        <title>AcademIC</title>
+        <link rel="icon" href="../static/main-logo.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="../static/main-logo.ico" type="image/x-icon">
+        <style>
+          .login-page {
+            width: 360px;
+            padding: 8% 0 0;
+            margin: auto;
+          }
+          .message {
+            text-align:center;
+            margin: 20px 0 20px;
+            color: #b3b3b3;
+            font-size: 12px;
+          }
+          .message a {
+            color: #195a7a;
+            text-decoration: none;
+          }
+          .form {
+            position: relative;
+            z-index: 1;
+            background: #FFFFFF;
+            max-width: 360px;
+            margin: 0 auto 100px;
+            padding: 0px 45px;
+            text-align: center;
+          }
+          .form input {
+            font-family: "Roboto", sans-serif;
+            outline: 0;
+            background: #f2f2f2;
+            width: 100%;
+            border: 0;
+            margin: 0 0 15px;
+            padding: 15px;
+            box-sizing: border-box;
+            font-size: 14px;
+          }
+          .form button {
+            font-family: "Roboto", sans-serif;
+            text-transform: uppercase;
+            outline: 0;
+            background: #195a7a;
+            width: 100%;
+            border: 0;
+            padding: 15px;
+            color: #FFFFFF;
+            font-size: 14px;
+            -webkit-transition: all 0.3 ease;
+            transition: all 0.3 ease;
+            cursor: pointer;
+          }
+          .form button:hover,.form button:active,.form button:focus {
+            background: #195a7a;
+          }
+          body {
+            background-color: white;
+            font-family: "Roboto", sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+          }
+        </style>
+    </head>
+    <body>
+      <div class="login-page">
+        <img src="../static/main-logo-rasterized.jpg" alt="AcademIC" style='width: 100%; object-fit: contain'>
+        <div class="form">
+                  <p class="message">请使用您的 AMS 用户名及密码登录</p>
+          <form class="login-form"; action = "/Grade_Page"; method = "POST">
+            <input type="text" name="User_Name" placeholder="username"/>
+            <input type="password" name="Password" placeholder="password"/>
+            <button type="submit" value = "Submit">登录</button>
+          </form>
+                  <p class="message">登录代表您已阅读并接受 <a href="tos.html"> AcademIC 使用条款</a></p>
+        </div>
+      </div>
+    </body>
+</html>
